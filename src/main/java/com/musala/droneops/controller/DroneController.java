@@ -38,7 +38,10 @@ public class DroneController {
     
     @PostMapping(value="/save")
     public String saveDrone(@RequestBody Drone drone) {
-        droneService.saveDrone(drone);
+        Drone returnedDrone = droneService.saveDrone(drone);
+        if (returnedDrone == null) {
+            return "Can't save anymore drones";
+        }
         return "Drone saved...";
     }
     
