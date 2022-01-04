@@ -18,33 +18,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class MedicationController {
     
-    //@Autowired
-    //private MedicationRepository medicRepo;
-    
     @Autowired
     private MedicationServiceInterface medicationService;
     
     @GetMapping(value="/medications")
     public List<Medication> getAllMedications() {
-        //return medicRepo.findAll();
         return medicationService.getAllMedication();
     }
     
     @GetMapping(value="/medications/code/{code}")
     public Medication getMedicationsByCode(@PathVariable String code) {
-        //List<Medication> all_medications = medicationService.getAllMedication();
-        //List<Medication> medications = new ArrayList<>();
-        //all_medications.stream().filter(med -> med.getCode().equals(code))
-        //        .forEach(medic -> medications.add(medic));
-        //return medications;
         return medicationService.getMedicationByCode(code);
     }
     
     @PostMapping(value="/medication/save")
     public Medication saveMedication(@RequestBody Medication medication) {
         return medicationService.createMedication(medication);
-        //medicRepo.save(medication);
-        //return "Saved medication...";
     }
     
     @PutMapping(value="/medications/update/{code}")
@@ -55,7 +44,6 @@ public class MedicationController {
         updatedMedication.setWeight(medication.getWeight());
         updatedMedication.setImageUrl(medication.getImageUrl());
         return medicationService.createMedication(updatedMedication);
-        //return "Updated ... ";
     }
     
     /**    

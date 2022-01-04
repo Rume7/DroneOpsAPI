@@ -38,7 +38,7 @@ public class DroneController {
     
     @PostMapping(value="/save")
     public String saveDrone(@RequestBody Drone drone) {
-        droneRepository.save(drone);
+        droneService.saveDrone(drone);
         return "Drone saved...";
     }
     
@@ -50,13 +50,13 @@ public class DroneController {
         updatedDrone.setWeight(drone.getWeight());
         updatedDrone.setBatteryLevel(drone.getBatteryLevel());
         updatedDrone.setDroneState(drone.getDroneState());
-        droneRepository.save(updatedDrone);
-        return "Updated drone: " + drone.getSerialNumber();
+        droneService.updateDrone(id, updatedDrone);
+        return "Updated drone: " + id;
     }
     
     @DeleteMapping(value="/deleteDrone/{id}")
     public String deleteDrone(@PathVariable long id) {
-        droneRepository.deleteById(id);
+        droneService.deleteDrone(id);
         return "Deleted drone " + id;
     }
 }
