@@ -1,7 +1,6 @@
 package com.musala.droneops.controller;
 
 import com.musala.droneops.model.Drone;
-import com.musala.droneops.repository.DroneRepository;
 import com.musala.droneops.service.DroneService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class DroneController {
-    
-    @Autowired
-    private DroneRepository droneRepository;
-    
+        
     @Autowired
     private DroneService droneService;
     
@@ -46,8 +42,8 @@ public class DroneController {
     }
     
     @PutMapping(value="/updateDrone/{id}")
-    public String updateDrone(@PathVariable long id, @RequestBody Drone drone) {
-        Drone updatedDrone = droneRepository.findById(id).get();
+    public String updateDrone(@PathVariable long id, @RequestBody Drone drone) {        
+        Drone updatedDrone = droneService.getDroneById(id);
         updatedDrone.setSerialNumber(drone.getSerialNumber());
         updatedDrone.setModel(drone.getModel());
         updatedDrone.setWeight(drone.getWeight());
